@@ -18,3 +18,21 @@ class StockProcessor:
 
     def get_volume(self):
         return self.stock_prices.Volume
+
+    def get_last_price(self):
+        return self.get_closes_prices().iloc[-1]
+
+    def get_daily_variation(self):
+        today_price = self.get_last_price()
+        yesterday_price = self.get_closes_prices().iloc[-2]
+        variation = ((today_price / yesterday_price) - 1) * 100
+        return variation
+
+    def get_info(self):
+        return self.stock_data.info
+
+    def get_market_cap(self):
+        return self.stock_data.info['marketCap']
+
+    def get_average_volume(self):
+        return self.stock_data.info['averageVolume']
